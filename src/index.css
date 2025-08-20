@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/* ===== Base ===== */
+html, body, #root { height: 100%; }
+body { background:#06080c; color:#fff; }
+
+/* ===== StarJedi ===== */
+@font-face{
+  font-family:'StarJedi';
+  src:url('/fonts/Starjedi.ttf') format('truetype');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+.starjedi{
+  font-family: StarJedi, ui-sans-serif, system-ui;
+  font-weight: 400;
+  letter-spacing: .06em;
+}
+
+/* ===== Underline ===== */
+.link-underline{ position:relative; }
+.link-underline::after{
+  content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:currentColor;
+  transform:scaleX(0); transform-origin:left center;
+  transition:transform .28s cubic-bezier(.2,.7,.1,1);
+}
+.link-underline:hover::after{ transform:scaleX(1); }
+
+/* ===== Icon glow ===== */
+.icon-glow{ transition: transform .25s ease, filter .25s ease, color .25s ease; }
+.icon-glow:hover, .group:hover .icon-glow{
+  color:#facc15;
+  filter: drop-shadow(0 0 4px #facc15) drop-shadow(0 0 12px #f59e0b);
+  transform: translateY(-1px);
+}
+
+/* ===== Buttons ===== */
+.btn-fill{
+  position:relative; display:inline-flex; align-items:center; gap:.5rem; overflow:hidden;
+  border-radius:12px; border:1px solid rgba(51,65,85,.6);
+  padding:.5rem 1rem; background:rgba(2,6,23,.6); color:#e5e7eb;
+  transition:box-shadow .25s ease, transform .25s ease, color .2s ease, border-color .2s ease;
+}
+.btn-fill:hover{ color:#fff; border-color:rgba(148,163,184,.6); box-shadow:0 0 10px rgba(148,163,184,.25); transform:translateY(-1px); }
+.btn-fill::before{
+  content:""; position:absolute; inset:0; width:0%;
+  background:linear-gradient(90deg, rgba(148,163,184,.22), rgba(148,163,184,.35));
+  transition: width .35s ease;
+}
+.btn-fill:hover::before{ width:100%; }
+
+/* Buy $VADER — yellow, dashed on hover */
+.btn-buy{
+  display:inline-flex; align-items:center; gap:.5rem; border-radius:12px;
+  padding:.5rem 1rem; font-weight:600;
+  background:linear-gradient(180deg, #fbbf24, #f59e0b);
+  color:#111827; border:1px solid rgba(250,204,21,.45);
+  transition: box-shadow .25s ease, transform .2s ease, filter .2s ease;
+  position:relative; overflow:hidden;
+}
+.btn-buy:hover{
+  filter: saturate(1.05);
+  box-shadow: 0 0 6px rgba(250,204,21,.45), 0 0 18px rgba(245,158,11,.35);
+  transform: translateY(-1px);
+  outline: 2px dashed rgba(255,255,255,.85);
+  outline-offset: 2px;
+}
+.btn-buy::before{
+  content:""; position:absolute; inset:0; width:0%;
+  background:linear-gradient(90deg, rgba(255,255,255,.18), rgba(255,255,255,.28));
+  transition: width .35s ease;
+}
+.btn-buy:hover::before{ width:100%; }
+.btn-buy:hover::after{
+  content:""; position:absolute; inset:-5px; border-radius:14px;
+  border:2px dashed rgba(255,255,255,.8);
+  pointer-events:none;
+}
+
+/* $VADER button — dark, no dashed */
+.btn-vader{
+  display:inline-flex; align-items:center; gap:.5rem; border-radius:12px;
+  padding:.45rem 1rem; font-weight:800; letter-spacing:.02em;
+  background:linear-gradient(180deg, #1f2937, #0f172a);
+  color:#e5e7eb; border:1px solid rgba(148,163,184,.25);
+  transition: box-shadow .25s ease, transform .2s ease, filter .2s ease;
+  position:relative; overflow:hidden;
+}
+.btn-vader:hover{
+  box-shadow: 0 0 12px rgba(148,163,184,.25), 0 0 24px rgba(148,163,184,.15);
+  transform: translateY(-1px);
+}
+.btn-vader::before{
+  content:""; position:absolute; inset:0; width:0%;
+  background:linear-gradient(90deg, rgba(148,163,184,.18), rgba(148,163,184,.28));
+  transition: width .35s ease;
+}
+.btn-vader:hover::before{ width:100%; }
+
+/* Cards */
+.frame-glow { transition: box-shadow .25s ease, transform .25s ease; }
+.frame-glow:hover { box-shadow: 0 0 0 1px rgba(148,163,184,.35), 0 12px 28px rgba(0,0,0,.35), 0 0 18px rgba(245,158,11,.15); transform: translateY(-2px); }
+
+/* Flicker */
+.flicker-once{ animation:flicker .9s ease-in-out 1 both; }
+.flicker-hover:hover{ animation:flicker .9s ease-in-out 1 both; }
+@keyframes flicker{
+  0%{opacity:.2} 15%{opacity:1} 30%{opacity:.35} 45%{opacity:1} 60%{opacity:.5} 100%{opacity:1}
+}
+
+/* Scramble */
+.scramble-wrap{ position:relative; display:inline-block; font-family:inherit; }
+.scramble-placeholder{ visibility:hidden; white-space:pre; }
+.scramble-actual{ position:absolute; left:0; top:0; white-space:pre; }
+
+/* Full-width marquee vignette */
+.marquee-full{ position:relative; left:50%; transform:translateX(-50%); width:100vw; overflow:hidden; }
+.marquee-full::before,
+.marquee-full::after{
+  content:""; position:absolute; top:0; bottom:0; width:clamp(24px, 7vw, 120px); pointer-events:none; z-index:10;
+}
+.marquee-full::before{ left:0;  background:linear-gradient(90deg, rgba(6,8,12,1), rgba(6,8,12,0)); filter: blur(2px); }
+.marquee-full::after{  right:0; background:linear-gradient(270deg, rgba(6,8,12,1), rgba(6,8,12,0)); filter: blur(2px); }
+
+/* Tokenomics shimmer */
+.trim-fill{
+  background:linear-gradient(90deg, rgba(250,204,21,.9), rgba(251,191,36,.9), rgba(250,204,21,.9));
+  background-size:200% 100%;
+  animation:trimShimmer 2s linear infinite;
+}
+@keyframes trimShimmer{ 0%{ background-position:0% 0 } 100%{ background-position:200% 0 } }
+
+/* Напівпрозорі картки з підсвіченням на hover */
+.card-dim{ opacity:.68; transition: opacity .25s ease; }
+.group:hover .card-dim{ opacity:1; }
